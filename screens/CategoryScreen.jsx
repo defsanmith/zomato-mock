@@ -19,13 +19,15 @@ function CategoryScreen(props) {
   return (
     <View style={styles.screen}>
       <FlatList
-        keyExtractor={(item, index) => {
-          return (item.categories.id + index).toString();
-        }}
+        keyExtractor={(item, index) => (item.categories.id + index).toString()}
         data={categories}
-        renderItem={(category) => {
-          return <Category title={category.item.categories.name} />;
-        }}
+        renderItem={(category) => (
+          <Category
+            title={category.item.categories.name}
+            id={category.item.categories.id}
+            navigation={props.navigation}
+          />
+        )}
       />
     </View>
   );

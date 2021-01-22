@@ -1,17 +1,23 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
-import { Link } from "react-router-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import color from "../constants/color";
 
 import Card from "./Card";
 
 function Category(props) {
+  const handleOnPress = () => {
+    props.navigation.navigate("Restaurants", {
+      category_id: props.id,
+      category: props.title,
+    });
+  };
+  
   return (
-    <Link to={"/" + props.title}>
+    <Pressable onPress={handleOnPress}>
       <Card style={styles.category}>
         <Text style={styles.title}>{props.title}</Text>
       </Card>
-    </Link>
+    </Pressable>
   );
 }
 
@@ -23,7 +29,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 15,
-    color: color.primary,
+    color: "#000",
   },
 });
 
