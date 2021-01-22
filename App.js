@@ -1,21 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { NativeRouter, Route } from "react-router-native";
+import Header from "./components/Header";
+
+import CategoryScreen from "./screens/CategoryScreen";
+import RestaurantScreen from "./screens/RestaurantScreen";
 
 export default function App() {
+  const [header, setHeader] = useState("Categories");
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeRouter>
+      <View style={styles.container}>
+        <Header title={header} />
+        <Route exact path="/" component={CategoryScreen} />
+        <Route
+          path="/:category"
+          render={(props) => <RestaurantScreen setHeader={setHeader} {...props} />}
+        />
+      </View>
+    </NativeRouter>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginBottom: 150,
   },
 });
